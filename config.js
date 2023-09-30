@@ -15,3 +15,4 @@ module.exports = {
       ? JWT_SECRET
       : '3889720fafc60526a65ca686d65cd06faee48e4d1c66e87e23ad0c7052083a58',
 };
+
