@@ -31,12 +31,17 @@ const getUserInfo = async (req, res, next) => {
 const updateUserInfo = async (req, res, next) => {
   const { email, name } = req.body;
   try {
-    const updatedUser = await User.findByIdAndUpdate(req.user._id, { email, name }, { new: true, runValidators: true }).orFail(new NotFoundError(USER_NOT_FOUND));
+    const update = { email, name };
+    const options = { new: true, runValidators: true };
+    const updatedUser = await User
+      .findByIdAndUpdate(req.user._id, update, options)
+      .orFail(new NotFoundError(USER_NOT_FOUND));
     res.send(updatedUser);
   } catch (err) {
     handleMongooseError(err, next);
   }
 };
+
 
 const setJwtCookie = (res, userId) => {
   const token = jwt.sign({ _id: userId }, secretKey, { expiresIn: '7d' });

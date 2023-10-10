@@ -38,16 +38,19 @@ const createMovie = async (req, res, next) => {
 
 const deleteMovie = async (req, res, next) => {
   try {
-    const movie = await Movie.findById(req.params.movieId).orFail(new NotFoundError(MOVIE_NOT_FOUND));
+    const movie = await Movie.findById(req.params.movieId)
+                              .orFail(new NotFoundError(MOVIE_NOT_FOUND));
     if (movie.owner.toString() !== req.user._id) {
       throw new ForbiddenError(NO_DELETE_PERMISSION);
     }
+
     const deletedMovie = await movie.deleteOne();
     res.send(deletedMovie);
   } catch (err) {
     handleMongooseError(err, next);
   }
 };
+
 
 module.exports = {
   getAllMovies,
