@@ -14,3 +14,4 @@
 - GET /movies - возвращает все сохранённые пользователем фильмы
 - POST /movies - создаёт фильм с переданными в теле country, director, duration, year, description, image, trailer, nameRU, nameEN и thumbnail 
 - DELETE /movies/movieId - удаляет сохранённый фильм по _id
+.
